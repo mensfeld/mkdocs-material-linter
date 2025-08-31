@@ -119,7 +119,7 @@ Each rule can be individually enabled/disabled or configured:
 ```json
 {
   "config": {
-    "material-admonition-types": false,  // Disable a specific rule
+    "material-admonition-types": false,
     "material-admonition-indentation": true,
     "material-code-annotations": "warning",
     "material-content-tabs": true,
