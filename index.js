@@ -12,6 +12,5 @@ module.exports = [
   require('./lib/rules/material-icons-valid'),
   require('./lib/rules/material-meta-tags'),
   require('./lib/rules/material-mermaid-syntax'),
-  require('./lib/rules/material-footnotes-syntax'),
-  require('./lib/rules/material-math-blocks')
+  require('./lib/rules/material-footnotes-syntax')
 ];

@@ -19,8 +19,7 @@ const testConfig = {
   'material-icons-valid': true,
   'material-meta-tags': false, // Disabled for existing fixtures
   'material-mermaid-syntax': true,
-  'material-footnotes-syntax': true,
-  'material-math-blocks': false // Disabled for existing fixtures with math
+  'material-footnotes-syntax': true
 };
 
 /**
@@ -176,8 +175,7 @@ async function runSpecificRuleTests() {
     require('./rules/test-material-meta-tags'),
     require('./rules/test-material-mermaid-syntax'),
     require('./rules/test-material-footnotes-syntax'),
-    require('./rules/test-material-math-blocks')
-  ];
+      ];
 
   // Run each test suite
   for (const testModule of tests) {
