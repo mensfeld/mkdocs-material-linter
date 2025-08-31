@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/mkdocs-material-linter.svg)](https://www.npmjs.com/package/mkdocs-material-linter)
 [![CI Status](https://github.com/mensfeld/mkdocs-material-linter/workflows/CI/badge.svg)](https://github.com/mensfeld/mkdocs-material-linter/actions)
 
-A comprehensive markdownlint-cli2 plugin that validates Material for MkDocs-specific markdown syntax including admonitions, content tabs, code annotations, and navigation structure.
+A markdownlint-cli2 plugin that provides custom rules for validating Material for MkDocs-specific markdown syntax.
 
 ## Why This Exists
 
@@ -16,81 +16,24 @@ Material for MkDocs extends standard Markdown with powerful features like admoni
 
 This plugin ensures your Material for MkDocs documentation is valid, consistent, and follows best practices before you build your site.
 
-## Quick Start
+## Provided Rules
 
-```bash
-# Install
-npm install mkdocs-material-linter --save-dev
-
-# Create config file
-echo '{
-  "globs": ["**/*.md"],
-  "ignores": ["node_modules/**"],
-  "customRules": ["mkdocs-material-linter"],
-  "config": {
-    "material-admonition-types": true,
-    "material-admonition-indentation": true,
-    "material-admonition-empty": true,
-    "material-code-annotations": true,
-    "material-content-tabs": true,
-    "material-navigation-structure": true
-  }
-}' > .markdownlint-cli2.jsonc
-
-# Run linter
-npx markdownlint-cli2
-```
-
-### Try It Now
-
-```bash
-# Test with a sample
-echo '!!! invalid "test"\n    Content here' | npx markdownlint-cli2 --stdin --customRules mkdocs-material-linter
-```
-
-## What It Validates
-
-| Rule | Purpose | Severity |
-|------|---------|----------|
-| `material-admonition-types` | Validates only supported admonition types (note, warning, tip, etc.) | Error |
-| `material-admonition-indentation` | Enforces 4-space indentation for admonition content | Error |
-| `material-admonition-empty` | Detects admonitions with no content (forgot to indent) | Error |
-| `material-content-tabs` | Validates `===` delimiter syntax and tab structure | Error |
-| `material-code-annotations` | Ensures annotation comment style matches code language | Warning |
-| `material-navigation-structure` | Checks heading hierarchy and navigation best practices | Warning |
-
-## Supported Material Syntax
-
-### Admonitions (Both `!!!` and `???`)
-```markdown
-!!! note "Regular admonition"
-    Content with 4-space indentation
-
-??? tip "Collapsible admonition"
-    Hidden content
-
-???+ warning "Expanded collapsible"
-    Initially visible content
-```
-
-### Content Tabs
-```markdown
-=== "Tab 1"
-    Content for first tab
-
-=== "Tab 2"
-    Content for second tab
-```
-
-### Code Annotations
-```python
-print("Hello")  # (1)!
-```
-```javascript
-console.log("Hello");  // (1)!
-```
+- **material-admonition-types** (Error) - Validates only supported admonition types (note, warning, tip, etc.)
+- **material-admonition-indentation** (Error) - Enforces 4-space indentation for admonition content
+- **material-admonition-empty** (Error) - Detects admonitions with no content (forgot to indent)
+- **material-content-tabs** (Error) - Validates `===` delimiter syntax and tab structure
+- **material-code-annotations** (Warning) - Ensures annotation comment style matches code language
+- **material-navigation-structure** (Warning) - Checks heading hierarchy and navigation best practices
 
 ## Installation & Usage
+
+### Prerequisites
+
+This is a plugin for markdownlint-cli2. You need to have markdownlint-cli2 installed and configured in your project first:
+
+```bash
+npm install markdownlint-cli2 --save-dev
+```
 
 ### Installation
 
@@ -104,12 +47,10 @@ pnpm add -D mkdocs-material-linter
 
 ### Configuration
 
-Create `.markdownlint-cli2.jsonc` in your project root:
+Add this plugin to your existing `.markdownlint-cli2.jsonc` configuration:
 
 ```json
 {
-  "globs": ["docs/**/*.md", "*.md"],
-  "ignores": ["node_modules/**", "dist/**", ".git/**"],
   "customRules": ["mkdocs-material-linter"],
   "config": {
     "material-admonition-types": true,
@@ -158,257 +99,31 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
 }
 ```
 
-## Examples
-
-### Valid Material for MkDocs Syntax
-
-This content will pass all rules:
-
-````markdown
-# Project Documentation
-
-## Getting Started
-
-This section covers the basics.
-
-### Installation
-
-!!! note "Requirements"
-    Make sure you have Python 3.8+ installed.
-
-Follow these steps:
-
-=== "pip"
-    ```shell
-    pip install mkdocs-material
-    ```
-
-=== "conda"
-    ```shell
-    conda install -c conda-forge mkdocs-material
-    ```
-
-### Configuration
-
-!!! tip
-    Use the configuration wizard for quick setup.
-    
-    You can run it with:
-    
-    ```shell
-    mkdocs new my-project  # (1)!
-    ```
-    
-    1. This creates a new MkDocs project
-
-!!! warning "Important"
-    Always backup your configuration before making changes.
-````
-
-### Common Issues and Fixes
-
-The linter will catch these common mistakes:
-
-#### Invalid Admonition Types
-
-❌ **Wrong:**
-```markdown
-!!! caution
-    This type doesn't exist
-```
-
-✅ **Correct:**
-```markdown
-!!! warning
-    Use 'warning' instead of 'caution'
-```
-
-#### Incorrect Indentation
-
-❌ **Wrong:**
-```markdown
-!!! note
-  Only 2 spaces
-```
-
-✅ **Correct:**
-```markdown
-!!! note
-    Use 4 spaces for indentation
-```
-
-#### Bad Content Tabs
-
-❌ **Wrong:**
-```markdown
-== "Missing Equal"
-    Not enough equals signs
-
-=== Unquoted Title
-    Titles must be quoted
-```
-
-✅ **Correct:**
-```markdown
-=== "Proper Tab"
-    Content with proper indentation
-```
-
-#### Wrong Code Annotation Style
-
-❌ **Wrong:**
-```python
-print("Hello")  // (1)!  # Should use # for Python
-```
-
-✅ **Correct:**
-```python
-print("Hello")  # (1)!
-```
-
 ## Rule Details
 
-### material-admonition-types (Error)
+### material-admonition-types
 
-Validates that admonitions use only supported Material for MkDocs types.
+Validates that admonitions use only supported Material for MkDocs types: `note`, `abstract`, `info`, `tip`, `success`, `question`, `warning`, `failure`, `danger`, `bug`, `example`, `quote`.
 
-**Supported types:**
-- `note`, `abstract`, `info`, `tip`, `success`, `question`
-- `warning`, `failure`, `danger`, `bug`, `example`, `quote`
+### material-admonition-indentation
 
-**Examples:**
+Ensures admonition content uses exactly 4-space indentation, not tabs or other spacing.
 
-✅ Valid:
-```markdown
-!!! note "Optional title"
-    Content with 4 spaces
+### material-admonition-empty
 
-??? tip
-    Collapsible content
-```
+Detects admonitions that have no content because the content is not properly indented with 4 spaces.
 
-❌ Invalid:
-```markdown
-!!! invalid
-    This type doesn't exist
+### material-code-annotations
 
-!!! Note
-    Type should be lowercase
-```
+Validates that code annotation comment style matches the language (e.g., `#` for Python, `//` for JavaScript).
 
-### material-admonition-indentation (Error)
+### material-content-tabs
 
-Ensures admonition content uses exactly 4-space indentation.
+Validates content tab structure using `===` delimiters with quoted titles and proper indentation.
 
-**Examples:**
+### material-navigation-structure
 
-✅ Valid:
-```markdown
-!!! note
-    Content indented with 4 spaces
-    
-    More content with 4 spaces
-```
-
-❌ Invalid:
-```markdown
-!!! note
-  Content with only 2 spaces
-
-!!! warning
-		Content with tabs
-```
-
-### material-admonition-empty (Error)
-
-Detects admonitions that have no content because the content is not properly indented. This is a common mistake where writers forget to indent the content with 4 spaces.
-
-**Examples:**
-
-✅ Valid:
-```markdown
-!!! warning "Title"
-    This content is properly indented.
-```
-
-❌ Invalid:
-```markdown
-!!! warning "Title"
-This content is not indented - won't be part of the admonition!
-
-!!! danger
-
-??? tip
-  Only 2 spaces - needs 4!
-```
-
-### material-code-annotations (Warning)
-
-Validates that code annotation syntax matches the language comment style.
-
-**Examples:**
-
-✅ Valid:
-```python
-print("Hello")  # (1)!
-```
-
-```javascript
-console.log("Hello");  // (1)!
-```
-
-❌ Invalid:
-```python
-print("Hello")  // (1)!  # Wrong comment style
-```
-
-### material-content-tabs (Error)
-
-Validates content tab structure and syntax.
-
-**Examples:**
-
-✅ Valid:
-```markdown
-=== "Tab 1"
-    Content for tab 1
-
-=== "Tab 2"
-    Content for tab 2
-```
-
-❌ Invalid:
-```markdown
-== "Tab 1"  # Wrong delimiter
-    Content
-
-=== Tab 1  # Missing quotes
-    Content
-```
-
-### material-navigation-structure (Warning)
-
-Validates navigation best practices:
-- No skipped heading levels
-- Maximum navigation depth of 3 levels
-- Navigation titles under 50 characters
-
-**Examples:**
-
-✅ Valid:
-```markdown
-# Main Title
-## Section
-### Subsection
-```
-
-❌ Invalid:
-```markdown
-# Main Title
-### Skipped Level
-
-# This Is A Very Long Navigation Title That Exceeds The Recommended Character Limit
-```
+Validates navigation best practices: no skipped heading levels, maximum depth of 3 levels, titles under 50 characters.
 
 ## Advanced Configuration
 
@@ -417,77 +132,11 @@ Each rule can be individually enabled/disabled or configured:
 ```json
 {
   "config": {
-    "material-admonition-types": {
-      "enabled": true,
-      "autofix": true
-    },
+    "material-admonition-types": false,  // Disable a specific rule
     "material-admonition-indentation": true,
-    "material-code-annotations": false,
-    "material-content-tabs": "warning",
-    "material-navigation-structure": {
-      "enabled": true,
-      "maxDepth": 3,
-      "maxTitleLength": 50
-    }
-  }
-}
-```
-
-## CI/CD Integration
-
-### GitHub Actions
-
-```yaml
-name: CI
-on: [push, pull_request]
-
-jobs:
-  lint-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run lint        # Lint JavaScript code
-      - run: npm test            # Run tests
-      - run: npx markdownlint-cli2  # Lint documentation
-```
-
-Alternatively, for documentation-only linting:
-
-```yaml
-name: Lint Documentation
-
-on: [push, pull_request]
-
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - run: npm install mkdocs-material-linter
-      - run: npx markdownlint-cli2
-```
-
-### Pre-commit Hook
-
-Add to your `package.json`:
-```json
-{
-  "scripts": {
-    "lint:docs": "markdownlint-cli2",
-    "lint:docs:fix": "markdownlint-cli2 --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:docs"
-    }
+    "material-code-annotations": "warning",
+    "material-content-tabs": true,
+    "material-navigation-structure": true
   }
 }
 ```
@@ -505,13 +154,3 @@ A: Yes, but markdownlint-cli2 is recommended for better performance and features
 
 **Q: Can I use this with other Material themes?**  
 A: This is specifically designed for Material for MkDocs. Other themes may have different syntax.
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Related Projects
-
-- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) - The theme this linter supports
-- [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) - The CLI tool this plugin works with
-- [markdownlint](https://github.com/DavidAnson/markdownlint) - The core markdown linting library
