@@ -1,5 +1,11 @@
 # mkdocs-material-linter changelog
 
+## 1.2.0 (2025-08-31)
+
+- [Fix] `material-admonition-indentation` rule now properly handles code blocks and nested content with flexible indentation
+- [Enhancement] `material-admonition-indentation` rule now allows even number spacing (4, 6, 8, etc.) instead of only multiples of 4
+- [Fix] `material-admonition-indentation` rule no longer stops processing files early when encountering nested content
+
 ## 1.1.0 (2025-08-31)
 
 - [Fix] `material-navigation-structure` rule now ignores comments inside code blocks (both fenced and indented)
