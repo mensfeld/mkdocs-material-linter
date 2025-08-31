@@ -1,11 +1,13 @@
 {
   "globs": ["**/*.md"],
+  "ignores": ["node_modules/**"],
   "customRules": [
     "./index.js"
   ],
   "config": {
     "material-admonition-types": true,
     "material-admonition-indentation": true,
+    "material-admonition-empty": true,
     "material-code-annotations": true,
     "material-content-tabs": true,
     "material-navigation-structure": true

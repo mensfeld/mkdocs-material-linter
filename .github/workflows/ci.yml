@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 20.x]
+        node-version: [16.x, 18.x, 20.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -93,4 +93,4 @@ jobs:
       run: npm ci
     
     - name: Lint documentation files
-      run: npx markdownlint-cli2 "*.md" --customRules ./index.js || true
+      run: npx markdownlint-cli2 --customRules ./index.js || true

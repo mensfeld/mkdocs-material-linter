@@ -1,8 +1,10 @@
 {
+  "ignores": ["node_modules/**", "dist/**", ".git/**"],
   "customRules": ["mkdocs-material-linter"],
   "config": {
     "material-admonition-types": true,
     "material-admonition-indentation": true,
+    "material-admonition-empty": true,
     "material-code-annotations": true,
     "material-content-tabs": true,
     "material-navigation-structure": true
