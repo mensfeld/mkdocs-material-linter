@@ -1,5 +1,11 @@
 # mkdocs-material-linter changelog
 
+## 1.4.2 (2025-08-31)
+
+- [Enhancement] `material-navigation-structure` rule increased character limit from 100 to 200 characters for heading titles
+- [Enhancement] `material-navigation-structure` rule no longer flags vague headings like "Overview" and "Introduction"  
+- [Enhancement] `material-navigation-structure` rule no longer flags ALL CAPS headings to support technical terms like "TSTP", "API", etc.
+
 ## 1.4.0 (2025-08-31)
 
 - [Enhancement] `material-navigation-structure` rule no longer flags headings with punctuation (colons, etc.) to better support technical documentation with code snippets and error messages in headings
