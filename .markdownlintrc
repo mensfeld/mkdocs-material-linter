@@ -1,0 +1,10 @@
+{
+  "customRules": ["mkdocs-material-linter"],
+  "config": {
+    "material-admonition-types": true,
+    "material-admonition-indentation": true,
+    "material-code-annotations": true,
+    "material-content-tabs": true,
+    "material-navigation-structure": true
+  }
+}
