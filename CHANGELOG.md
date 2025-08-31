@@ -1,11 +1,12 @@
 # mkdocs-material-linter changelog
 
-## 1.0.2 (2025-08-31)
+## 1.1.0 (2025-08-31)
 
 - [Fix] `material-navigation-structure` rule now ignores comments inside code blocks (both fenced and indented)
 - [Feature] `material-shell-language-standardization` rule enforces using "shell" instead of "bash" or "sh" for shell code blocks
 - [Feature] `material-bundle-exec-shell-type` rule ensures code blocks starting with "bundle exec" use shell language type
 - [Feature] `material-admonition-empty-title` rule prevents empty title quotes in admonitions
+- [Enhancement] README now uses table format for rule overview with better organization
 
 ## 1.0.0 (2024-08-31)
 
