@@ -154,3 +154,25 @@ A: Yes, but markdownlint-cli2 is recommended for better performance and features
 
 **Q: Can I use this with other Material themes?**  
 A: This is specifically designed for Material for MkDocs. Other themes may have different syntax.
+
+## Development
+
+### Testing
+
+```bash
+npm test        # Run all tests
+npm run lint    # Run ESLint
+```
+
+### Releasing
+
+```bash
+# 1. Update version
+npm version patch  # or minor/major
+
+# 2. Publish to npm
+npm publish
+
+# 3. Create git tag
+git push --tags
+```
