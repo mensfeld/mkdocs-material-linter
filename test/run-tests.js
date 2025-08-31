@@ -23,21 +23,21 @@ const testConfig = {
  */
 async function runTests() {
   console.log('🧪 Running mkdocs-material-linter tests...\n');
-  
+
   let totalTests = 0;
   let passedTests = 0;
-  
+
   // Test valid fixtures (should have no errors)
   console.log('📋 Testing valid fixtures (should pass):');
   const validDir = path.join(__dirname, 'fixtures', 'valid');
   const validFiles = fs.readdirSync(validDir);
-  
+
   for (const file of validFiles) {
     if (path.extname(file) === '.md') {
       totalTests++;
       const filePath = path.join(validDir, file);
       const result = await testFile(filePath, true);
-      
+
       if (result.passed) {
         console.log(`  ✅ ${file}`);
         passedTests++;
@@ -50,20 +50,20 @@ async function runTests() {
       }
     }
   }
-  
+
   console.log();
-  
+
   // Test invalid fixtures (should have errors)
   console.log('📋 Testing invalid fixtures (should fail):');
   const invalidDir = path.join(__dirname, 'fixtures', 'invalid');
   const invalidFiles = fs.readdirSync(invalidDir);
-  
+
   for (const file of invalidFiles) {
     if (path.extname(file) === '.md') {
       totalTests++;
       const filePath = path.join(invalidDir, file);
       const result = await testFile(filePath, false);
-      
+
       if (result.passed) {
         console.log(`  ✅ ${file} (found ${result.errorCount} expected errors)`);
         passedTests++;
@@ -80,10 +80,10 @@ async function runTests() {
       }
     }
   }
-  
+
   // Summary
   console.log(`\n📊 Test Results: ${passedTests}/${totalTests} tests passed`);
-  
+
   if (passedTests === totalTests) {
     console.log('🎉 All tests passed!');
     return true;
@@ -99,13 +99,13 @@ async function runTests() {
 async function testFile(filePath, shouldPass) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
-    
+
     const options = {
       strings: { [filePath]: content },
       customRules: materialRules,
       config: testConfig
     };
-    
+
     return new Promise((resolve) => {
       markdownlint(options, (err, result) => {
         if (err) {
@@ -116,14 +116,14 @@ async function testFile(filePath, shouldPass) {
           });
           return;
         }
-        
+
         const fileResults = result[filePath] || [];
         const errorCount = fileResults.length;
-        
+
         // For valid files, we expect no errors
         // For invalid files, we expect at least one error
         const passed = shouldPass ? (errorCount === 0) : (errorCount > 0);
-        
+
         resolve({
           passed,
           errorCount,
@@ -145,11 +145,11 @@ async function testFile(filePath, shouldPass) {
  */
 function testIndividualRules() {
   console.log('🔍 Testing individual rules:');
-  
+
   materialRules.forEach(rule => {
     const names = Array.isArray(rule.names) ? rule.names : [rule.names];
     const primaryName = names[0];
-    
+
     console.log(`  📝 ${primaryName}`);
     console.log(`     Description: ${rule.description}`);
     console.log(`     Tags: ${rule.tags.join(', ')}`);
@@ -163,9 +163,9 @@ function testIndividualRules() {
 if (require.main === module) {
   console.log('mkdocs-material-linter Test Suite');
   console.log('===================================\n');
-  
+
   testIndividualRules();
-  
+
   runTests().then(success => {
     process.exit(success ? 0 : 1);
   }).catch(error => {
