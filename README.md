@@ -111,7 +111,6 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
 }
 ```
 
-
 ## Advanced Configuration
 
 Each rule can be individually enabled/disabled or configured:

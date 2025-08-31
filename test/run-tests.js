@@ -15,7 +15,12 @@ const testConfig = {
   'material-admonition-empty': true,
   'material-code-annotations': true,
   'material-content-tabs': true,
-  'material-navigation-structure': true
+  'material-navigation-structure': true,
+  'material-icons-valid': true,
+  'material-meta-tags': false, // Disabled for existing fixtures
+  'material-mermaid-syntax': true,
+  'material-footnotes-syntax': true,
+  'material-math-blocks': false // Disabled for existing fixtures with math
 };
 
 /**
@@ -159,6 +164,32 @@ function testIndividualRules() {
   });
 }
 
+/**
+ * Run specific rule tests
+ */
+async function runSpecificRuleTests() {
+  console.log('🧪 Running specific rule tests...\n');
+
+  // Import all the individual test modules
+  const tests = [
+    require('./rules/test-material-icons-valid'),
+    require('./rules/test-material-meta-tags'),
+    require('./rules/test-material-mermaid-syntax'),
+    require('./rules/test-material-footnotes-syntax'),
+    require('./rules/test-material-math-blocks')
+  ];
+
+  // Run each test suite
+  for (const testModule of tests) {
+    const testFunction = Object.values(testModule)[0];
+    if (typeof testFunction === 'function') {
+      testFunction();
+      // Add a small delay to ensure proper output ordering
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+  }
+}
+
 // Run tests if this file is executed directly
 if (require.main === module) {
   console.log('mkdocs-material-linter Test Suite');
@@ -166,7 +197,9 @@ if (require.main === module) {
 
   testIndividualRules();
 
-  runTests().then(success => {
+  runSpecificRuleTests().then(() => {
+    return runTests();
+  }).then(success => {
     process.exit(success ? 0 : 1);
   }).catch(error => {
     console.error('Test runner error:', error);

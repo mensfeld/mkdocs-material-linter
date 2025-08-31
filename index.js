@@ -8,5 +8,10 @@ module.exports = [
   require('./lib/rules/content-tabs'),
   require('./lib/rules/navigation-structure'),
   require('./lib/rules/shell-language-standardization'),
-  require('./lib/rules/bundle-exec-shell-type')
+  require('./lib/rules/bundle-exec-shell-type'),
+  require('./lib/rules/material-icons-valid'),
+  require('./lib/rules/material-meta-tags'),
+  require('./lib/rules/material-mermaid-syntax'),
+  require('./lib/rules/material-footnotes-syntax'),
+  require('./lib/rules/material-math-blocks')
 ];
