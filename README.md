@@ -21,9 +21,12 @@ This plugin ensures your Material for MkDocs documentation is valid, consistent,
 - **material-admonition-types** (Error) - Validates only supported admonition types (note, warning, tip, etc.)
 - **material-admonition-indentation** (Error) - Enforces 4-space indentation for admonition content
 - **material-admonition-empty** (Error) - Detects admonitions with no content (forgot to indent)
+- **material-admonition-empty-title** (Warning) - Prevents empty title quotes in admonitions
 - **material-content-tabs** (Error) - Validates `===` delimiter syntax and tab structure
 - **material-code-annotations** (Warning) - Ensures annotation comment style matches code language
 - **material-navigation-structure** (Warning) - Checks heading hierarchy and navigation best practices
+- **material-shell-language-standardization** (Warning) - Enforces using "shell" instead of "bash" or "sh" for shell code blocks
+- **material-bundle-exec-shell-type** (Warning) - Ensures code blocks starting with "bundle exec" use shell language type
 
 ## Installation & Usage
 
@@ -56,9 +59,12 @@ Add this plugin to your existing `.markdownlint-cli2.jsonc` configuration:
     "material-admonition-types": true,
     "material-admonition-indentation": true,
     "material-admonition-empty": true,
+    "material-admonition-empty-title": true,
     "material-code-annotations": true,
     "material-content-tabs": true,
-    "material-navigation-structure": true
+    "material-navigation-structure": true,
+    "material-shell-language-standardization": true,
+    "material-bundle-exec-shell-type": true
   }
 }
 ```
@@ -92,9 +98,13 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
   "markdownlint.config": {
     "material-admonition-types": true,
     "material-admonition-indentation": true,
+    "material-admonition-empty": true,
+    "material-admonition-empty-title": true,
     "material-code-annotations": true,
     "material-content-tabs": true,
-    "material-navigation-structure": true
+    "material-navigation-structure": true,
+    "material-shell-language-standardization": true,
+    "material-bundle-exec-shell-type": true
   }
 }
 ```
@@ -123,7 +133,19 @@ Validates content tab structure using `===` delimiters with quoted titles and pr
 
 ### material-navigation-structure
 
-Validates navigation best practices: no skipped heading levels, maximum depth of 3 levels, titles under 50 characters.
+Validates navigation best practices: no skipped heading levels, maximum depth of 3 levels, titles under 50 characters. Now properly ignores comments in code blocks.
+
+### material-admonition-empty-title
+
+Prevents admonitions from having empty title quotes (`""`). If no title is needed, remove the quotes entirely.
+
+### material-shell-language-standardization
+
+Enforces using "shell" instead of "bash" or "sh" for shell code blocks to maintain consistency across documentation.
+
+### material-bundle-exec-shell-type
+
+Ensures that code blocks starting with "bundle exec" commands use the shell language type for proper syntax highlighting.
 
 ## Advanced Configuration
 
