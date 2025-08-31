@@ -2,8 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/mkdocs-material-linter.svg)](https://www.npmjs.com/package/mkdocs-material-linter)
 [![CI Status](https://github.com/mensfeld/mkdocs-material-linter/workflows/CI/badge.svg)](https://github.com/mensfeld/mkdocs-material-linter/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/mensfeld/mkdocs-material-linter.svg)](https://github.com/mensfeld/mkdocs-material-linter)
 
 A comprehensive markdownlint-cli2 plugin that validates Material for MkDocs-specific markdown syntax including admonitions, content tabs, code annotations, and navigation structure.
 
