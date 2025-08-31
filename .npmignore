@@ -1,0 +1,94 @@
+# Test files and fixtures
+test/
+*.test.js
+*.spec.js
+
+# CI/CD and GitHub
+.github/
+
+# Development configuration files
+.eslintrc.json
+.eslintrc.js
+.eslintignore
+.markdownlint-cli2.jsonc
+.markdownlint-cli2.json
+.markdownlint.json
+.markdownlint.yaml
+.markdownlint.yml
+.markdownlintrc
+.markdownlintrc.json
+.markdownlintrc.yaml
+.markdownlintrc.yml
+.editorconfig
+.prettierrc
+.prettierignore
+
+# Documentation files not needed in package
+CLAUDE.md
+RELEASE.md
+CONTRIBUTING.md
+CHANGELOG.md
+example-usage.md
+docs/
+
+# Renovate configuration
+renovate.json
+.renovaterc
+.renovaterc.json
+
+# Claude AI configuration
+.claude/
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.history/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Dependencies
+node_modules/
+
+# Build artifacts that shouldn't be published
+dist/
+build/
+*.tgz
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Environment files
+.env
+.env.*
+
+# Package manager files (except package.json and package-lock.json)
+yarn.lock
+pnpm-lock.yaml
+.npmrc
+.yarnrc
+.pnpmfile.cjs

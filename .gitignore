@@ -104,3 +104,7 @@ Thumbs.db
 # Test files
 test.md
 *.test.md
+
+# AI
+.claude
+CLAUDE.md
