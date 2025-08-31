@@ -18,15 +18,17 @@ This plugin ensures your Material for MkDocs documentation is valid, consistent,
 
 ## Provided Rules
 
-- **material-admonition-types** (Error) - Validates only supported admonition types (note, warning, tip, etc.)
-- **material-admonition-indentation** (Error) - Enforces 4-space indentation for admonition content
-- **material-admonition-empty** (Error) - Detects admonitions with no content (forgot to indent)
-- **material-admonition-empty-title** (Warning) - Prevents empty title quotes in admonitions
-- **material-content-tabs** (Error) - Validates `===` delimiter syntax and tab structure
-- **material-code-annotations** (Warning) - Ensures annotation comment style matches code language
-- **material-navigation-structure** (Warning) - Checks heading hierarchy and navigation best practices
-- **material-shell-language-standardization** (Warning) - Enforces using "shell" instead of "bash" or "sh" for shell code blocks
-- **material-bundle-exec-shell-type** (Warning) - Ensures code blocks starting with "bundle exec" use shell language type
+| Rule Name | Severity | Description |
+|-----------|----------|-------------|
+| `material-admonition-types` | Error | Validates only supported admonition types (note, warning, tip, etc.) |
+| `material-admonition-indentation` | Error | Enforces 4-space indentation for admonition content |
+| `material-admonition-empty` | Error | Detects admonitions with no content (forgot to indent) |
+| `material-admonition-empty-title` | Warning | Prevents empty title quotes in admonitions |
+| `material-content-tabs` | Error | Validates `===` delimiter syntax and tab structure |
+| `material-code-annotations` | Warning | Ensures annotation comment style matches code language |
+| `material-navigation-structure` | Warning | Checks heading hierarchy and navigation best practices |
+| `material-shell-language-standardization` | Warning | Enforces using "shell" instead of "bash" or "sh" for shell code blocks |
+| `material-bundle-exec-shell-type` | Warning | Ensures code blocks starting with "bundle exec" use shell language type |
 
 ## Installation & Usage
 
@@ -109,43 +111,6 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
 }
 ```
 
-## Rule Details
-
-### material-admonition-types
-
-Validates that admonitions use only supported Material for MkDocs types: `note`, `abstract`, `info`, `tip`, `success`, `question`, `warning`, `failure`, `danger`, `bug`, `example`, `quote`.
-
-### material-admonition-indentation
-
-Ensures admonition content uses exactly 4-space indentation, not tabs or other spacing.
-
-### material-admonition-empty
-
-Detects admonitions that have no content because the content is not properly indented with 4 spaces.
-
-### material-code-annotations
-
-Validates that code annotation comment style matches the language (e.g., `#` for Python, `//` for JavaScript).
-
-### material-content-tabs
-
-Validates content tab structure using `===` delimiters with quoted titles and proper indentation.
-
-### material-navigation-structure
-
-Validates navigation best practices: no skipped heading levels, maximum depth of 3 levels, titles under 50 characters. Now properly ignores comments in code blocks.
-
-### material-admonition-empty-title
-
-Prevents admonitions from having empty title quotes (`""`). If no title is needed, remove the quotes entirely.
-
-### material-shell-language-standardization
-
-Enforces using "shell" instead of "bash" or "sh" for shell code blocks to maintain consistency across documentation.
-
-### material-bundle-exec-shell-type
-
-Ensures that code blocks starting with "bundle exec" commands use the shell language type for proper syntax highlighting.
 
 ## Advanced Configuration
 
