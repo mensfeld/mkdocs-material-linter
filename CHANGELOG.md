@@ -1,5 +1,9 @@
 # mkdocs-material-linter changelog
 
+## 1.4.0 (2025-08-31)
+
+- [Enhancement] `material-navigation-structure` rule no longer flags headings with punctuation (colons, etc.) to better support technical documentation with code snippets and error messages in headings
+
 ## 1.3.0 (2025-08-31)
 
 - [Breaking] Removed `material-math-blocks` rule due to excessive false positives and aggressive validation
