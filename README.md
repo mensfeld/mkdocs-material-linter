@@ -133,13 +133,13 @@ npx markdownlint-cli2
 # Lint specific files
 npx markdownlint-cli2 "docs/**/*.md"
 
-# Auto-fix issues (where possible)
-npx markdownlint-cli2 --fix
+# Lint with custom rules only
+npx markdownlint-cli2
 
 # Add to package.json scripts
 "scripts": {
   "lint:docs": "markdownlint-cli2",
-  "lint:docs:fix": "markdownlint-cli2 --fix"
+  "lint:docs": "markdownlint-cli2"
 }
 ```
 
@@ -312,10 +312,7 @@ Each rule can be individually enabled/disabled or configured:
 {
   "config": {
     "material-admonition-types": true,
-    "material-admonition-indentation": {
-      "enabled": true,
-      "autofix": true
-    },
+    "material-admonition-indentation": true,
     "material-code-annotations": false,
     "material-content-tabs": true,
     "material-navigation-structure": "warning"
@@ -372,9 +369,6 @@ A: Yes! Set any rule to `false` in your config or use `"off"`.
 
 **Q: Does this work with regular markdownlint (not CLI2)?**  
 A: Yes, but markdownlint-cli2 is recommended for better performance and features.
-
-**Q: How do I auto-fix issues?**  
-A: Use `markdownlint-cli2 --fix` for automatic fixes where supported.
 
 **Q: Can I use this with other Material themes?**  
 A: This is specifically designed for Material for MkDocs. Other themes may have different syntax.

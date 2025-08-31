@@ -5,6 +5,8 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  schedule:
+    - cron: '0 5 * * *'  # Run at 5 AM UTC daily
 
 jobs:
   test:
@@ -67,15 +69,6 @@ jobs:
         
         npx markdownlint-cli2 test-ci.md --customRules ./index.js || echo "Expected errors found"
     
-    - name: Test auto-fix capability
-      run: |
-        cat << 'EOF' > test-fix.md
-        !!! note
-          Bad indentation here
-        EOF
-        
-        npx markdownlint-cli2 test-fix.md --customRules ./index.js --fix
-        grep "    Bad indentation here" test-fix.md && echo "Auto-fix successful" || echo "Auto-fix failed"
 
   lint-docs:
     runs-on: ubuntu-latest
