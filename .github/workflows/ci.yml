@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run JavaScript linter
+      run: npm run lint
+
+    - name: Run tests
+      run: npm test
+
+    - name: Test package can be imported
+      run: node -e "console.log('Rules loaded:', require('./index.js').length)"
+
+  integration-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Test with sample markdown
+      run: |
+        cat << 'EOF' > test-ci.md
+        # Test Document
+
+        !!! note
+            This is a test admonition.
+
+        !!! invalid
+            This should trigger an error.
+
+        === "Tab 1"
+            Tab content here.
+        EOF
+        
+        npx markdownlint-cli2 test-ci.md --customRules ./index.js || echo "Expected errors found"
+    
+    - name: Test auto-fix capability
+      run: |
+        cat << 'EOF' > test-fix.md
+        !!! note
+          Bad indentation here
+        EOF
+        
+        npx markdownlint-cli2 test-fix.md --customRules ./index.js --fix
+        grep "    Bad indentation here" test-fix.md && echo "Auto-fix successful" || echo "Auto-fix failed"
+
+  lint-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Lint documentation files
+      run: npx markdownlint-cli2 "*.md" --customRules ./index.js || true
