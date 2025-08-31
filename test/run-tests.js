@@ -175,7 +175,7 @@ async function runSpecificRuleTests() {
     require('./rules/test-material-meta-tags'),
     require('./rules/test-material-mermaid-syntax'),
     require('./rules/test-material-footnotes-syntax'),
-      ];
+  ];
 
   // Run each test suite
   for (const testModule of tests) {
