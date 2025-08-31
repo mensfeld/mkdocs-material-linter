@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "timezone": "UTC",
+  "schedule": ["before 6am on Monday"],
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Major dependency updates"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Minor and patch updates",
+      "automerge": true
+    },
+    {
+      "matchPackageNames": ["markdownlint", "markdownlint-rule-helpers"],
+      "groupName": "markdownlint updates",
+      "reviewers": ["mensfeld"]
+    },
+    {
+      "matchPackageNames": ["eslint"],
+      "groupName": "ESLint updates"
+    }
+  ],
+  "npm": {
+    "minimumReleaseAge": "3 days"
+  },
+  "dependencyDashboard": true,
+  "labels": ["dependencies"],
+  "reviewers": ["mensfeld"],
+  "assignees": ["mensfeld"]
+}
