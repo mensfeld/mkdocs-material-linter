@@ -3,6 +3,9 @@
 ## 1.3.0 (2025-08-31)
 
 - [Breaking] Removed `material-math-blocks` rule due to excessive false positives and aggressive validation
+- [Fix] `material-footnotes-syntax` rule now properly ignores footnote patterns inside code blocks to prevent false positives
+- [Enhancement] `material-navigation-structure` rule now allows heading level 5 (increased from max level 3)
+- [Enhancement] `material-navigation-structure` rule now allows longer heading titles (up to 100 characters, increased from 50)
 - [Enhancement] Reduced rule count from 14 to 13 rules for better usability
 
 ## 1.2.0 (2025-08-31)
