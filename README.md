@@ -133,13 +133,13 @@ npx markdownlint-cli2
 # Lint specific files
 npx markdownlint-cli2 "docs/**/*.md"
 
-# Lint with custom rules only
-npx markdownlint-cli2
+# Auto-fix issues where possible
+npx markdownlint-cli2 --fix
 
 # Add to package.json scripts
 "scripts": {
   "lint:docs": "markdownlint-cli2",
-  "lint:docs": "markdownlint-cli2"
+  "lint:docs:fix": "markdownlint-cli2 --fix"
 }
 ```
 
@@ -158,6 +158,114 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
     "material-navigation-structure": true
   }
 }
+```
+
+## Examples
+
+### Valid Material for MkDocs Syntax
+
+This content will pass all rules:
+
+````markdown
+# Project Documentation
+
+## Getting Started
+
+This section covers the basics.
+
+### Installation
+
+!!! note "Requirements"
+    Make sure you have Python 3.8+ installed.
+
+Follow these steps:
+
+=== "pip"
+    ```shell
+    pip install mkdocs-material
+    ```
+
+=== "conda"
+    ```shell
+    conda install -c conda-forge mkdocs-material
+    ```
+
+### Configuration
+
+!!! tip
+    Use the configuration wizard for quick setup.
+    
+    You can run it with:
+    
+    ```shell
+    mkdocs new my-project  # (1)!
+    ```
+    
+    1. This creates a new MkDocs project
+
+!!! warning "Important"
+    Always backup your configuration before making changes.
+````
+
+### Common Issues and Fixes
+
+The linter will catch these common mistakes:
+
+#### Invalid Admonition Types
+
+❌ **Wrong:**
+```markdown
+!!! caution
+    This type doesn't exist
+```
+
+✅ **Correct:**
+```markdown
+!!! warning
+    Use 'warning' instead of 'caution'
+```
+
+#### Incorrect Indentation
+
+❌ **Wrong:**
+```markdown
+!!! note
+  Only 2 spaces
+```
+
+✅ **Correct:**
+```markdown
+!!! note
+    Use 4 spaces for indentation
+```
+
+#### Bad Content Tabs
+
+❌ **Wrong:**
+```markdown
+== "Missing Equal"
+    Not enough equals signs
+
+=== Unquoted Title
+    Titles must be quoted
+```
+
+✅ **Correct:**
+```markdown
+=== "Proper Tab"
+    Content with proper indentation
+```
+
+#### Wrong Code Annotation Style
+
+❌ **Wrong:**
+```python
+print("Hello")  // (1)!  # Should use # for Python
+```
+
+✅ **Correct:**
+```python
+print("Hello")  # (1)!
 ```
 
 ## Rule Details
@@ -311,11 +419,18 @@ Each rule can be individually enabled/disabled or configured:
 ```json
 {
   "config": {
-    "material-admonition-types": true,
+    "material-admonition-types": {
+      "enabled": true,
+      "autofix": true
+    },
     "material-admonition-indentation": true,
     "material-code-annotations": false,
-    "material-content-tabs": true,
-    "material-navigation-structure": "warning"
+    "material-content-tabs": "warning",
+    "material-navigation-structure": {
+      "enabled": true,
+      "maxDepth": 3,
+      "maxTitleLength": 50
+    }
   }
 }
 ```
@@ -343,13 +458,33 @@ jobs:
       - run: npx markdownlint-cli2  # Lint documentation
 ```
 
+Alternatively, for documentation-only linting:
+
+```yaml
+name: Lint Documentation
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm install mkdocs-material-linter
+      - run: npx markdownlint-cli2
+```
+
 ### Pre-commit Hook
 
 Add to your `package.json`:
 ```json
 {
   "scripts": {
-    "lint:docs": "markdownlint-cli2"
+    "lint:docs": "markdownlint-cli2",
+    "lint:docs:fix": "markdownlint-cli2 --fix"
   },
   "husky": {
     "hooks": {
