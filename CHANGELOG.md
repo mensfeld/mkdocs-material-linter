@@ -1,5 +1,10 @@
 # mkdocs-material-linter changelog
 
+## 1.3.0 (2025-08-31)
+
+- [Breaking] Removed `material-math-blocks` rule due to excessive false positives and aggressive validation
+- [Enhancement] Reduced rule count from 14 to 13 rules for better usability
+
 ## 1.2.0 (2025-08-31)
 
 - [Fix] `material-admonition-indentation` rule now properly handles code blocks and nested content with flexible indentation
