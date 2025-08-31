@@ -12,6 +12,7 @@ const materialRules = require('../index');
 const testConfig = {
   'material-admonition-types': true,
   'material-admonition-indentation': true,
+  'material-admonition-empty': true,
   'material-code-annotations': true,
   'material-content-tabs': true,
   'material-navigation-structure': true

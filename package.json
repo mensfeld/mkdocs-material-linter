@@ -37,14 +37,14 @@
     "markdownlint-cli2": "^0.18.1"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/mkdocs-material-linter.git"
+    "url": "https://github.com/mensfeld/mkdocs-material-linter.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/mkdocs-material-linter/issues"
+    "url": "https://github.com/mensfeld/mkdocs-material-linter/issues"
   },
-  "homepage": "https://github.com/yourusername/mkdocs-material-linter#readme"
+  "homepage": "https://github.com/mensfeld/mkdocs-material-linter#readme"
 }
