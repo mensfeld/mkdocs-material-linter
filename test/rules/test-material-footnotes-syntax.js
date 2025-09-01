@@ -154,9 +154,9 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
     const options = {
       strings: { [`test-${index}`]: test.content },
       customRules: [materialFootnotesSyntaxRule],
-      config: { 
+      config: {
         'default': false,
-        'material-footnotes-syntax': true 
+        'material-footnotes-syntax': true
       },
       markdownItFactory: () => markdownIt()
     };

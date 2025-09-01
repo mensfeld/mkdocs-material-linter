@@ -136,9 +136,9 @@ Valid hide options.`,
     const options = {
       strings: { [`test-${index}`]: test.content },
       customRules: [materialMetaTagsRule],
-      config: { 
+      config: {
         'default': false,
-        'material-meta-tags': true 
+        'material-meta-tags': true
       },
       markdownItFactory: () => markdownIt()
     };

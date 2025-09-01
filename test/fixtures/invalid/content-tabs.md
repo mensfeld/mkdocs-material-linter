@@ -5,7 +5,7 @@
 == "Two Equals"
     Should use three equals signs.
 
-==== "Four Equals"  
+==== "Four Equals"
     Should use three equals signs.
 
 ===== "Five Equals"

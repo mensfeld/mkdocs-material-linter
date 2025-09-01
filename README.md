@@ -10,7 +10,7 @@ A markdownlint-cli2 plugin that provides custom rules for validating Material fo
 Material for MkDocs extends standard Markdown with powerful features like admonitions (`!!!`), content tabs (`===`), and collapsible blocks (`???`). However, standard markdown linters don't understand this syntax and can't validate it. This leads to:
 
 - **Silent failures** - Invalid admonition types that don't render
-- **Inconsistent formatting** - Mixed indentation breaking content blocks  
+- **Inconsistent formatting** - Mixed indentation breaking content blocks
 - **Broken features** - Malformed content tabs or annotations that don't work
 - **Poor navigation** - Heading structures that create confusing documentation sites
 
@@ -45,7 +45,7 @@ npm install markdownlint-cli2 --save-dev
 ```bash
 npm install mkdocs-material-linter --save-dev
 # or
-yarn add -D mkdocs-material-linter  
+yarn add -D mkdocs-material-linter
 # or
 pnpm add -D mkdocs-material-linter
 ```
@@ -129,16 +129,16 @@ Each rule can be individually enabled/disabled or configured:
 
 ## FAQ
 
-**Q: Why do I get errors about missing dependencies?**  
+**Q: Why do I get errors about missing dependencies?**
 A: Make sure you have `markdownlint` >= 0.30.0 installed as a peer dependency.
 
-**Q: Can I disable specific rules?**  
+**Q: Can I disable specific rules?**
 A: Yes! Set any rule to `false` in your config or use `"off"`.
 
-**Q: Does this work with regular markdownlint (not CLI2)?**  
+**Q: Does this work with regular markdownlint (not CLI2)?**
 A: Yes, but markdownlint-cli2 is recommended for better performance and features.
 
-**Q: Can I use this with other Material themes?**  
+**Q: Can I use this with other Material themes?**
 A: This is specifically designed for Material for MkDocs. Other themes may have different syntax.
 
 ## Development

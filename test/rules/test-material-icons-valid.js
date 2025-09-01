@@ -79,9 +79,9 @@ Simple icons are not validated: :simple-python: :simple-javascript: :simple-none
     const options = {
       strings: { [`test-${index}`]: test.content },
       customRules: [materialIconsValidRule],
-      config: { 
+      config: {
         'default': false,
-        'material-icons-valid': true 
+        'material-icons-valid': true
       },
       markdownItFactory: () => markdownIt()
     };

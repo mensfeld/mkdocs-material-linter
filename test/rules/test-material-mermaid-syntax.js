@@ -191,9 +191,9 @@ invalidDiagram
     const options = {
       strings: { [`test-${index}`]: test.content },
       customRules: [materialMermaidSyntaxRule],
-      config: { 
+      config: {
         'default': false,
-        'material-mermaid-syntax': true 
+        'material-mermaid-syntax': true
       },
       markdownItFactory: () => markdownIt()
     };
