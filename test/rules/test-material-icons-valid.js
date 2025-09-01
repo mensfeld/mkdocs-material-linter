@@ -1,7 +1,8 @@
 /**
  * Tests for material-icons-valid rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialIconsValidRule = require('../../lib/rules/material-icons-valid');
 
 function runMaterialIconsValidTests() {
@@ -81,15 +82,12 @@ Simple icons are not validated: :simple-python: :simple-javascript: :simple-none
       config: { 
         'default': false,
         'material-icons-valid': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -104,7 +102,9 @@ Simple icons are not validated: :simple-python: :simple-javascript: :simple-none
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

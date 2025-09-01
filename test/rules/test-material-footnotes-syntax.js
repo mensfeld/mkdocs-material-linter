@@ -1,7 +1,8 @@
 /**
  * Tests for material-footnotes-syntax rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialFootnotesSyntaxRule = require('../../lib/rules/material-footnotes-syntax');
 
 function runMaterialFootnotesSyntaxTests() {
@@ -156,15 +157,12 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
       config: { 
         'default': false,
         'material-footnotes-syntax': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -179,7 +177,9 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

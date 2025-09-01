@@ -1,7 +1,8 @@
 /**
  * Tests for material-mermaid-syntax rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialMermaidSyntaxRule = require('../../lib/rules/material-mermaid-syntax');
 
 function runMaterialMermaidSyntaxTests() {
@@ -193,15 +194,12 @@ invalidDiagram
       config: { 
         'default': false,
         'material-mermaid-syntax': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -216,7 +214,9 @@ invalidDiagram
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

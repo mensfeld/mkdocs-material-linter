@@ -1,7 +1,8 @@
 /**
  * Test runner for mkdocs-material-linter
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const fs = require('fs');
 const path = require('path');
 
@@ -25,7 +26,7 @@ const testConfig = {
 /**
  * Run tests on fixture files
  */
-async function runTests() {
+function runTests() {
   console.log('🧪 Running mkdocs-material-linter tests...\n');
 
   let totalTests = 0;
@@ -40,7 +41,7 @@ async function runTests() {
     if (path.extname(file) === '.md') {
       totalTests++;
       const filePath = path.join(validDir, file);
-      const result = await testFile(filePath, true);
+      const result = testFile(filePath, true);
 
       if (result.passed) {
         console.log(`  ✅ ${file}`);
@@ -66,7 +67,7 @@ async function runTests() {
     if (path.extname(file) === '.md') {
       totalTests++;
       const filePath = path.join(invalidDir, file);
-      const result = await testFile(filePath, false);
+      const result = testFile(filePath, false);
 
       if (result.passed) {
         console.log(`  ✅ ${file} (found ${result.errorCount} expected errors)`);
@@ -100,41 +101,39 @@ async function runTests() {
 /**
  * Test a single file
  */
-async function testFile(filePath, shouldPass) {
+function testFile(filePath, shouldPass) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
 
     const options = {
       strings: { [filePath]: content },
       customRules: materialRules,
-      config: testConfig
+      config: testConfig,
+      markdownItFactory: () => markdownIt()
     };
 
-    return new Promise((resolve) => {
-      markdownlint(options, (err, result) => {
-        if (err) {
-          resolve({
-            passed: false,
-            errorCount: 1,
-            errors: [{ lineNumber: 0, ruleDescription: err.message }]
-          });
-          return;
-        }
+    try {
+      const result = markdownlint(options);
 
-        const fileResults = result[filePath] || [];
-        const errorCount = fileResults.length;
+      const fileResults = result[filePath] || [];
+      const errorCount = fileResults.length;
 
-        // For valid files, we expect no errors
-        // For invalid files, we expect at least one error
-        const passed = shouldPass ? (errorCount === 0) : (errorCount > 0);
+      // For valid files, we expect no errors
+      // For invalid files, we expect at least one error
+      const passed = shouldPass ? (errorCount === 0) : (errorCount > 0);
 
-        resolve({
-          passed,
-          errorCount,
-          errors: fileResults
-        });
-      });
-    });
+      return {
+        passed,
+        errorCount,
+        errors: fileResults
+      };
+    } catch (err) {
+      return {
+        passed: false,
+        errorCount: 1,
+        errors: [{ lineNumber: 0, ruleDescription: err.message }]
+      };
+    }
   } catch (error) {
     return {
       passed: false,
@@ -166,7 +165,7 @@ function testIndividualRules() {
 /**
  * Run specific rule tests
  */
-async function runSpecificRuleTests() {
+function runSpecificRuleTests() {
   console.log('🧪 Running specific rule tests...\n');
 
   // Import all the individual test modules
@@ -183,7 +182,7 @@ async function runSpecificRuleTests() {
     if (typeof testFunction === 'function') {
       testFunction();
       // Add a small delay to ensure proper output ordering
-      await new Promise(resolve => setTimeout(resolve, 200));
+      // Removed async delay
     }
   }
 }
@@ -195,14 +194,14 @@ if (require.main === module) {
 
   testIndividualRules();
 
-  runSpecificRuleTests().then(() => {
-    return runTests();
-  }).then(success => {
+  try {
+    runSpecificRuleTests();
+    const success = runTests();
     process.exit(success ? 0 : 1);
-  }).catch(error => {
+  } catch (error) {
     console.error('Test runner error:', error);
     process.exit(1);
-  });
+  }
 }
 
 module.exports = { runTests, testFile };

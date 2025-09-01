@@ -1,5 +1,12 @@
 # mkdocs-material-linter changelog
 
+## 1.5.1 (2025-08-31)
+
+- [Breaking] Minimum Node.js version is now 20.0.0 (was 16.0.0) due to markdownlint v0.38.0 ESM requirements
+- [Fix] Updated dependencies to support markdownlint v0.38.0 and markdownlint-rule-helpers v0.29.0
+- [Enhancement] Added markdown-it dependency to support new markdownItFactory requirement in markdownlint v0.38.0
+- [Fix] Updated test framework to use sync API instead of deprecated callback API
+
 ## 1.5.0 (2025-08-31)
 
 - [Enhancement] `material-navigation-structure` rule increased character limit from 100 to 200 characters for heading titles

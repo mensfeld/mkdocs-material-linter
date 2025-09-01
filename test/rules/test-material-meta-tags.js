@@ -1,7 +1,8 @@
 /**
  * Tests for material-meta-tags rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialMetaTagsRule = require('../../lib/rules/material-meta-tags');
 
 function runMaterialMetaTagsTests() {
@@ -138,15 +139,12 @@ Valid hide options.`,
       config: { 
         'default': false,
         'material-meta-tags': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -161,7 +159,9 @@ Valid hide options.`,
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {
