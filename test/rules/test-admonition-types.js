@@ -1,7 +1,8 @@
 /**
  * Tests for material-admonition-types rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const admonitionTypesRule = require('../../lib/rules/admonition-types');
 
 function runAdmonitionTypesTests() {
@@ -71,7 +72,8 @@ function runAdmonitionTypesTests() {
     const options = {
       strings: { [`test-${index}`]: test.content },
       customRules: [admonitionTypesRule],
-      config: { 'material-admonition-types': true }
+      config: { 'material-admonition-types': true },
+      markdownItFactory: () => markdownIt()
     };
 
     markdownlint(options, (err, result) => {

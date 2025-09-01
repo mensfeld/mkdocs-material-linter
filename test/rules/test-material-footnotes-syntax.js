@@ -1,7 +1,8 @@
 /**
  * Tests for material-footnotes-syntax rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialFootnotesSyntaxRule = require('../../lib/rules/material-footnotes-syntax');
 
 function runMaterialFootnotesSyntaxTests() {
@@ -154,6 +155,7 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
       strings: { [`test-${index}`]: test.content },
       customRules: [materialFootnotesSyntaxRule],
       config: { 
+        markdownItFactory: () => markdownIt(),
         'default': false,
         'material-footnotes-syntax': true 
       }

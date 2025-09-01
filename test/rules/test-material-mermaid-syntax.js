@@ -1,7 +1,8 @@
 /**
  * Tests for material-mermaid-syntax rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialMermaidSyntaxRule = require('../../lib/rules/material-mermaid-syntax');
 
 function runMaterialMermaidSyntaxTests() {
@@ -191,6 +192,7 @@ invalidDiagram
       strings: { [`test-${index}`]: test.content },
       customRules: [materialMermaidSyntaxRule],
       config: { 
+        markdownItFactory: () => markdownIt(),
         'default': false,
         'material-mermaid-syntax': true 
       }

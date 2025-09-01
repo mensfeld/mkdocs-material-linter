@@ -1,6 +1,6 @@
 {
   "name": "mkdocs-material-linter",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "markdownlint-cli2 custom rules for validating Material for MkDocs syntax including admonitions, content tabs, and code annotations",
   "main": "index.js",
   "scripts": {
@@ -25,14 +25,15 @@
   "author": "Material for MkDocs Community",
   "license": "MIT",
   "dependencies": {
-    "markdownlint-rule-helpers": "^0.25.0"
+    "markdownlint-rule-helpers": "^0.29.0"
   },
   "peerDependencies": {
     "markdownlint": ">=0.30.0"
   },
   "devDependencies": {
     "eslint": "^8.50.0",
-    "markdownlint": "^0.31.0",
+    "markdown-it": "^14.1.0",
+    "markdownlint": "^0.38.0",
     "markdownlint-cli2": "^0.18.1"
   },
   "engines": {

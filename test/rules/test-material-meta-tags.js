@@ -1,7 +1,8 @@
 /**
  * Tests for material-meta-tags rule
  */
-const markdownlint = require('markdownlint');
+const { lint: markdownlint } = require('markdownlint/sync');
+const markdownIt = require('markdown-it');
 const materialMetaTagsRule = require('../../lib/rules/material-meta-tags');
 
 function runMaterialMetaTagsTests() {
@@ -136,6 +137,7 @@ Valid hide options.`,
       strings: { [`test-${index}`]: test.content },
       customRules: [materialMetaTagsRule],
       config: { 
+        markdownItFactory: () => markdownIt(),
         'default': false,
         'material-meta-tags': true 
       }
