@@ -155,18 +155,14 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
       strings: { [`test-${index}`]: test.content },
       customRules: [materialFootnotesSyntaxRule],
       config: { 
-        markdownItFactory: () => markdownIt(),
         'default': false,
         'material-footnotes-syntax': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -181,7 +177,9 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

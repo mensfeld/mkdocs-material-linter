@@ -192,18 +192,14 @@ invalidDiagram
       strings: { [`test-${index}`]: test.content },
       customRules: [materialMermaidSyntaxRule],
       config: { 
-        markdownItFactory: () => markdownIt(),
         'default': false,
         'material-mermaid-syntax': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -218,7 +214,9 @@ invalidDiagram
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

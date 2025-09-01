@@ -76,12 +76,8 @@ function runAdmonitionTypesTests() {
       markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -96,7 +92,9 @@ function runAdmonitionTypesTests() {
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

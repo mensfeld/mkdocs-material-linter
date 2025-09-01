@@ -137,18 +137,14 @@ Valid hide options.`,
       strings: { [`test-${index}`]: test.content },
       customRules: [materialMetaTagsRule],
       config: { 
-        markdownItFactory: () => markdownIt(),
         'default': false,
         'material-meta-tags': true 
-      }
+      },
+      markdownItFactory: () => markdownIt()
     };
 
-    markdownlint(options, (err, result) => {
-      if (err) {
-        console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
-        return;
-      }
-
+    try {
+      const result = markdownlint(options);
       const errors = result[`test-${index}`] || [];
       const errorCount = errors.length;
 
@@ -163,7 +159,9 @@ Valid hide options.`,
           });
         }
       }
-    });
+    } catch (err) {
+      console.log(`  ❌ ${test.name}: Error running test - ${err.message}`);
+    }
   });
 
   setTimeout(() => {

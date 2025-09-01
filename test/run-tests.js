@@ -194,14 +194,14 @@ if (require.main === module) {
 
   testIndividualRules();
 
-  runSpecificRuleTests().then(() => {
-    return runTests();
-  }).then(success => {
+  try {
+    runSpecificRuleTests();
+    const success = runTests();
     process.exit(success ? 0 : 1);
-  }).catch(error => {
+  } catch (error) {
     console.error('Test runner error:', error);
     process.exit(1);
-  });
+  }
 }
 
 module.exports = { runTests, testFile };
