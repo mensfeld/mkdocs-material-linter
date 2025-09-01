@@ -1,5 +1,12 @@
 # mkdocs-material-linter changelog
 
+## 1.5.3 (2025-09-01)
+
+- [Feature] `material-blank-lines-spacing` rule ensures blank lines before and after headers and after code blocks
+- [Feature] `material-code-block-syntax` rule ensures code blocks have proper syntax - no type on closing tag and all blocks must be closed
+- [Enhancement] Enhanced rule count from 11 to 13 rules with comprehensive spacing and syntax validation
+- [Fix] Improved code block validation with proper handling of nested blocks in admonitions
+
 ## 1.5.2 (2025-08-31)
 
 - [Fix] Updated ESLint from v8.50.0 to v9.0.0 and migrated to new flat config format (eslint.config.js)

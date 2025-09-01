@@ -29,6 +29,8 @@ This plugin ensures your Material for MkDocs documentation is valid, consistent,
 | `material-navigation-structure` | Warning | Checks heading hierarchy and navigation best practices |
 | `material-shell-language-standardization` | Warning | Enforces using "shell" instead of "bash" or "sh" for shell code blocks |
 | `material-bundle-exec-shell-type` | Warning | Ensures code blocks starting with "bundle exec" use shell language type |
+| `material-blank-lines-spacing` | Warning | Ensures blank lines before and after headers and after code blocks |
+| `material-code-block-syntax` | Error | Code blocks must have proper syntax - no type on closing tag and all blocks must be closed |
 
 ## Installation & Usage
 
@@ -66,7 +68,9 @@ Add this plugin to your existing `.markdownlint-cli2.jsonc` configuration:
     "material-content-tabs": true,
     "material-navigation-structure": true,
     "material-shell-language-standardization": true,
-    "material-bundle-exec-shell-type": true
+    "material-bundle-exec-shell-type": true,
+    "material-blank-lines-spacing": true,
+    "material-code-block-syntax": true
   }
 }
 ```
@@ -106,7 +110,9 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
     "material-content-tabs": true,
     "material-navigation-structure": true,
     "material-shell-language-standardization": true,
-    "material-bundle-exec-shell-type": true
+    "material-bundle-exec-shell-type": true,
+    "material-blank-lines-spacing": true,
+    "material-code-block-syntax": true
   }
 }
 ```
