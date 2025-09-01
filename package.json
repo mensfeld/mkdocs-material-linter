@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node test/run-tests.js",
-    "lint": "eslint .",
+    "lint": "eslint --config eslint.config.js .",
     "lint:docs": "markdownlint-cli2"
   },
   "keywords": [
