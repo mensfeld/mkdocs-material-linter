@@ -55,7 +55,7 @@
     - List item 2
 
     1. Numbered item
-    2. Another item
+    1. Another item
 
     ```javascript
     const example = "code block";

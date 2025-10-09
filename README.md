@@ -31,6 +31,7 @@ This plugin ensures your Material for MkDocs documentation is valid, consistent,
 | `material-bundle-exec-shell-type` | Warning | Ensures code blocks starting with "bundle exec" use shell language type |
 | `material-blank-lines-spacing` | Warning | Ensures blank lines before and after headers and after code blocks |
 | `material-code-block-syntax` | Error | Code blocks must have proper syntax - no type on closing tag and all blocks must be closed |
+| `material-list-auto-numbering` | Warning | Ensures ordered lists starting with "1." use "1." for all items to enable auto-numbering |
 
 ## Installation & Usage
 
@@ -70,7 +71,8 @@ Add this plugin to your existing `.markdownlint-cli2.jsonc` configuration:
     "material-shell-language-standardization": true,
     "material-bundle-exec-shell-type": true,
     "material-blank-lines-spacing": true,
-    "material-code-block-syntax": true
+    "material-code-block-syntax": true,
+    "material-list-auto-numbering": true
   }
 }
 ```
@@ -112,7 +114,8 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
     "material-shell-language-standardization": true,
     "material-bundle-exec-shell-type": true,
     "material-blank-lines-spacing": true,
-    "material-code-block-syntax": true
+    "material-code-block-syntax": true,
+    "material-list-auto-numbering": true
   }
 }
 ```

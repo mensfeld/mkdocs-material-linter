@@ -1,5 +1,12 @@
 # mkdocs-material-linter changelog
 
+## 1.5.4 (2025-10-09)
+
+- [Feature] `material-list-auto-numbering` rule ensures ordered lists starting with "1." use "1." for all items to enable MkDocs auto-numbering
+- [Enhancement] Auto-fix support for list numbering - automatically converts sequential numbers to "1." format
+- [Fix] Lists not starting with "1." are intentionally ignored to preserve intentional numbering
+- [Enhancement] Enhanced rule count from 13 to 14 rules with comprehensive list validation
+
 ## 1.5.3 (2025-09-01)
 
 - [Feature] `material-blank-lines-spacing` rule ensures blank lines before and after headers and after code blocks
