@@ -25,7 +25,7 @@
   "author": "Material for MkDocs Community",
   "license": "MIT",
   "dependencies": {
-    "markdownlint-rule-helpers": "^0.29.0"
+    "markdownlint-rule-helpers": "^0.30.0"
   },
   "peerDependencies": {
     "markdownlint": ">=0.30.0"
@@ -34,7 +34,7 @@
     "eslint": "^9.0.0",
     "globals": "^16.3.0",
     "markdown-it": "^14.1.0",
-    "markdownlint": "^0.38.0",
+    "markdownlint": "^0.39.0",
     "markdownlint-cli2": "^0.18.1"
   },
   "engines": {
