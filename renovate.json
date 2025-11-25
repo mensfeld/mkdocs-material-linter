@@ -5,30 +5,27 @@
   ],
   "timezone": "UTC",
   "schedule": ["before 6am on Monday"],
+  "minimumReleaseAge": "7 days",
   "packageRules": [
     {
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major"],
-      "groupName": "Major dependency updates",
-      "minimumReleaseAge": "7 days"
+      "groupName": "Major dependency updates"
     },
     {
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "Minor and patch updates",
-      "automerge": true,
-      "minimumReleaseAge": "7 days"
+      "automerge": true
     },
     {
       "matchPackageNames": ["markdownlint", "markdownlint-rule-helpers"],
       "groupName": "markdownlint updates",
-      "reviewers": ["mensfeld"],
-      "minimumReleaseAge": "7 days"
+      "reviewers": ["mensfeld"]
     },
     {
       "matchPackageNames": ["eslint"],
-      "groupName": "ESLint updates",
-      "minimumReleaseAge": "7 days"
+      "groupName": "ESLint updates"
     }
   ],
   "dependencyDashboard": true,
