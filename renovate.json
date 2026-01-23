@@ -4,32 +4,64 @@
     "config:recommended"
   ],
   "timezone": "UTC",
-  "schedule": ["before 6am on Monday"],
+  "schedule": [
+    "before 6am on Monday"
+  ],
   "minimumReleaseAge": "7 days",
   "packageRules": [
     {
-      "matchManagers": ["npm"],
-      "matchUpdateTypes": ["major"],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "groupName": "Major dependency updates"
     },
     {
-      "matchManagers": ["npm"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "groupName": "Minor and patch updates",
       "automerge": true
     },
     {
-      "matchPackageNames": ["markdownlint", "markdownlint-rule-helpers"],
+      "matchPackageNames": [
+        "markdownlint",
+        "markdownlint-rule-helpers"
+      ],
       "groupName": "markdownlint updates",
-      "reviewers": ["mensfeld"]
+      "reviewers": [
+        "mensfeld"
+      ]
     },
     {
-      "matchPackageNames": ["eslint"],
+      "matchPackageNames": [
+        "eslint"
+      ],
       "groupName": "ESLint updates"
+    },
+    {
+      "description": "Group ruby/setup-ruby action with ruby version updates",
+      "matchPackageNames": [
+        "ruby/setup-ruby",
+        "ruby"
+      ],
+      "groupName": "ruby setup"
     }
   ],
   "dependencyDashboard": true,
-  "labels": ["dependencies"],
-  "reviewers": ["mensfeld"],
-  "assignees": ["mensfeld"]
+  "labels": [
+    "dependencies"
+  ],
+  "reviewers": [
+    "mensfeld"
+  ],
+  "assignees": [
+    "mensfeld"
+  ]
 }
