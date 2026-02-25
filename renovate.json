@@ -3,10 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "timezone": "UTC",
-  "schedule": [
-    "before 6am on Monday"
-  ],
   "minimumReleaseAge": "7 days",
   "packageRules": [
     {
@@ -26,8 +22,7 @@
         "minor",
         "patch"
       ],
-      "groupName": "Minor and patch updates",
-      "automerge": true
+      "groupName": "Minor and patch updates"
     },
     {
       "matchPackageNames": [
