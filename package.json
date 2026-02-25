@@ -35,7 +35,7 @@
     "globals": "^17.0.0",
     "markdown-it": "^14.1.0",
     "markdownlint": "^0.40.0",
-    "markdownlint-cli2": "^0.20.0"
+    "markdownlint-cli2": "^0.21.0"
   },
   "engines": {
     "node": ">=20.0.0"
