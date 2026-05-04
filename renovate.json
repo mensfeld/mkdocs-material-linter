@@ -58,5 +58,8 @@
   ],
   "assignees": [
     "mensfeld"
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
