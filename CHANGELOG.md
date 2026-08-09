@@ -1,5 +1,10 @@
 # mkdocs-material-linter changelog
 
+## 1.5.4 (2026-08-09)
+
+- [Fix] `material-code-block-syntax` and `material-blank-lines-spacing` no longer flag code fence examples nested inside a longer fence (e.g. a ` ``` ` block shown inside a ` ```` ` block). A fence now only closes with at least as many backticks as the one that opened it, matching CommonMark behavior ([#24](https://github.com/mensfeld/mkdocs-material-linter/issues/24))
+- [Enhancement] Wired the previously orphaned `code-block-syntax` and `blank-lines-spacing` test suites into the test runner so their cases actually execute
+
 ## 1.5.3 (2025-09-01)
 
 - [Feature] `material-blank-lines-spacing` rule ensures blank lines before and after headers and after code blocks

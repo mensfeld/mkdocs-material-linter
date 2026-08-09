@@ -237,6 +237,31 @@ Text
       ]
     },
     {
+      name: 'Valid - code fence example inside a longer fence',
+      markdown: `
+\`\`\`\`markdown
+\`\`\`plantuml
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+@enduml
+\`\`\`
+\`\`\`\`
+`,
+      errors: []
+    },
+    {
+      name: 'Valid - four-backtick fence wrapping a language-less block',
+      markdown: `
+\`\`\`\`
+\`\`\`
+some example
+\`\`\`
+\`\`\`\`
+`,
+      errors: []
+    },
+    {
       name: 'Invalid - truly nested unclosed blocks',
       markdown: `
 \`\`\`markdown
