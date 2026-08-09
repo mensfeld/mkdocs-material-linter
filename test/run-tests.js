@@ -187,6 +187,58 @@ function runSpecificRuleTests() {
   }
 }
 
+/**
+ * Run data-style rule test suites that export { name, rule, tests: [...] }.
+ * Each test provides inline markdown and the exact errors it should produce.
+ * Returns the number of failing test cases.
+ */
+function runDataStyleRuleTests() {
+  console.log('🧪 Running data-style rule tests...\n');
+
+  const suites = [
+    require('./rules/test-code-block-syntax'),
+    require('./rules/test-blank-lines-spacing'),
+  ];
+
+  let failures = 0;
+
+  for (const suite of suites) {
+    console.log(`  📝 ${suite.name}`);
+    const names = Array.isArray(suite.rule.names) ? suite.rule.names : [suite.rule.names];
+
+    for (const test of suite.tests) {
+      const options = {
+        strings: { test: test.markdown },
+        customRules: [suite.rule],
+        config: { default: false, [names[0]]: true },
+        markdownItFactory: () => markdownIt()
+      };
+
+      const actual = (markdownlint(options).test) || [];
+      const expected = test.errors || [];
+
+      let passed = actual.length === expected.length;
+      if (passed) {
+        passed = expected.every(exp => actual.some(act =>
+          act.lineNumber === exp.lineNumber &&
+          (exp.detail === undefined || act.errorDetail === exp.detail)));
+      }
+
+      if (passed) {
+        console.log(`     ✅ ${test.name}`);
+      } else {
+        failures++;
+        console.log(`     ❌ ${test.name}`);
+        console.log(`        Expected ${expected.length} error(s): ${JSON.stringify(expected)}`);
+        console.log(`        Got ${actual.length}: ${JSON.stringify(actual.map(a => ({ lineNumber: a.lineNumber, detail: a.errorDetail })))}`);
+      }
+    }
+    console.log();
+  }
+
+  return failures;
+}
+
 // Run tests if this file is executed directly
 if (require.main === module) {
   console.log('mkdocs-material-linter Test Suite');
@@ -196,7 +248,8 @@ if (require.main === module) {
 
   try {
     runSpecificRuleTests();
-    const success = runTests();
+    const dataStyleFailures = runDataStyleRuleTests();
+    const success = runTests() && dataStyleFailures === 0;
     process.exit(success ? 0 : 1);
   } catch (error) {
     console.error('Test runner error:', error);

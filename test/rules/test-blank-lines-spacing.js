@@ -196,6 +196,21 @@ Content
           detail: 'Headers should be preceded by a blank line'
         }
       ]
+    },
+    {
+      name: 'Valid - code fence example inside a longer fence',
+      markdown: `
+\`\`\`\`markdown
+\`\`\`plantuml
+@startuml
+Alice -> Bob: hi
+@enduml
+\`\`\`
+\`\`\`\`
+
+Text after
+`,
+      errors: []
     }
   ]
 };
