@@ -58,6 +58,20 @@ classDiagram
       expectedErrors: 0
     },
 
+    {
+      name: 'Valid state diagram with multi-line braces',
+      content: `# State Diagram
+
+\`\`\`mermaid
+stateDiagram-v2
+    state Fork {
+        [*] --> Active
+        Active --> [*]
+    }
+\`\`\``,
+      expectedErrors: 0
+    },
+
     // Invalid cases
     {
       name: 'Empty mermaid block',
@@ -219,9 +233,8 @@ invalidDiagram
     }
   });
 
-  setTimeout(() => {
-    console.log(`Material Mermaid Syntax Tests: ${passed}/${total} passed\n`);
-  }, 100);
+  console.log(`Material Mermaid Syntax Tests: ${passed}/${total} passed\n`);
+  return total - passed;
 }
 
 module.exports = { runMaterialMermaidSyntaxTests };

@@ -176,15 +176,17 @@ function runSpecificRuleTests() {
     require('./rules/test-material-footnotes-syntax'),
   ];
 
-  // Run each test suite
+  // Run each test suite, summing the number of failing cases so callers can
+  // gate the process exit code on them.
+  let failures = 0;
   for (const testModule of tests) {
     const testFunction = Object.values(testModule)[0];
     if (typeof testFunction === 'function') {
-      testFunction();
-      // Add a small delay to ensure proper output ordering
-      // Removed async delay
+      failures += testFunction() || 0;
     }
   }
+
+  return failures;
 }
 
 /**
@@ -247,9 +249,9 @@ if (require.main === module) {
   testIndividualRules();
 
   try {
-    runSpecificRuleTests();
+    const specificFailures = runSpecificRuleTests();
     const dataStyleFailures = runDataStyleRuleTests();
-    const success = runTests() && dataStyleFailures === 0;
+    const success = runTests() && dataStyleFailures === 0 && specificFailures === 0;
     process.exit(success ? 0 : 1);
   } catch (error) {
     console.error('Test runner error:', error);
