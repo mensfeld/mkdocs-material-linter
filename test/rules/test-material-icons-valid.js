@@ -107,9 +107,8 @@ Simple icons are not validated: :simple-python: :simple-javascript: :simple-none
     }
   });
 
-  setTimeout(() => {
-    console.log(`Material Icons Valid Tests: ${passed}/${total} passed\n`);
-  }, 100);
+  console.log(`Material Icons Valid Tests: ${passed}/${total} passed\n`);
+  return total - passed;
 }
 
 module.exports = { runMaterialIconsValidTests };

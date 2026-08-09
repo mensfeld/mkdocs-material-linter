@@ -36,6 +36,21 @@ Minimal but valid.`,
       expectedErrors: 0
     },
 
+    {
+      name: 'Front matter with list-style tags',
+      content: `---
+title: Page Title
+description: A valid description.
+tags:
+  - seo
+  - metadata
+---
+
+# Content
+Tags as a YAML block list.`,
+      expectedErrors: 0
+    },
+
     // Cases with warnings/errors
     {
       name: 'Missing front matter',
@@ -68,7 +83,7 @@ No description provided.`,
       name: 'Long description',
       content: `---
 title: Page Title
-description: This is a very long description that exceeds the recommended 160 character limit for SEO purposes and should trigger a warning about the length.
+description: This is a very long description that clearly exceeds the recommended 160 character limit for SEO purposes and should reliably trigger a warning about the excessive length of this text.
 ---
 
 # Content
@@ -164,9 +179,8 @@ Valid hide options.`,
     }
   });
 
-  setTimeout(() => {
-    console.log(`Material Meta Tags Tests: ${passed}/${total} passed\n`);
-  }, 100);
+  console.log(`Material Meta Tags Tests: ${passed}/${total} passed\n`);
+  return total - passed;
 }
 
 module.exports = { runMaterialMetaTagsTests };

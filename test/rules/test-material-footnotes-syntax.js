@@ -134,6 +134,17 @@ First[^1] and third[^3] footnotes, skipping second.
     },
 
     {
+      name: 'Orphan definition among valid ones',
+      content: `# Mixed References
+
+Referenced[^used] footnote here.
+
+[^used]: This one is referenced.
+[^orphan]: This one is not referenced.`,
+      expectedErrors: 1
+    },
+
+    {
       name: 'Multiple errors',
       content: `# Multiple Issues
 
@@ -182,9 +193,8 @@ Reference[^1] and missing[^missing] and duplicate[^dup].
     }
   });
 
-  setTimeout(() => {
-    console.log(`Material Footnotes Syntax Tests: ${passed}/${total} passed\n`);
-  }, 100);
+  console.log(`Material Footnotes Syntax Tests: ${passed}/${total} passed\n`);
+  return total - passed;
 }
 
 module.exports = { runMaterialFootnotesSyntaxTests };

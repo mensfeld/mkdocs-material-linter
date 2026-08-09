@@ -1,9 +1,13 @@
 # mkdocs-material-linter changelog
 
-## 1.5.4 (2026-08-09)
+## 1.5.4 (Unreleased)
 
 - [Fix] `material-code-block-syntax` and `material-blank-lines-spacing` no longer flag code fence examples nested inside a longer fence (e.g. a ` ``` ` block shown inside a ` ```` ` block). A fence now only closes with at least as many backticks as the one that opened it, matching CommonMark behavior ([#24](https://github.com/mensfeld/mkdocs-material-linter/issues/24))
+- [Fix] `material-meta-tags` now reads YAML front matter from `params.frontMatterLines` (markdownlint strips it out of `params.lines`), so pages that do have front matter are no longer always reported as missing it ([#80](https://github.com/mensfeld/mkdocs-material-linter/issues/80))
+- [Fix] `material-mermaid-syntax` checks bracket/brace balance across the whole block instead of per line, so multi-line `classDiagram`/`stateDiagram` bodies no longer produce false "unmatched braces" errors; edges like `A --> B` now count as node definitions ([#80](https://github.com/mensfeld/mkdocs-material-linter/issues/80))
+- [Fix] `material-footnotes-syntax` no longer counts a definition's own label as a reference to itself, fixing missed "definition never referenced" reports and spurious "reference has no definition" errors ([#80](https://github.com/mensfeld/mkdocs-material-linter/issues/80))
 - [Enhancement] Wired the previously orphaned `code-block-syntax` and `blank-lines-spacing` test suites into the test runner so their cases actually execute
+- [Enhancement] Failures in the `icons`, `meta-tags`, `mermaid`, and `footnotes` rule test suites now fail the `npm test` exit code instead of only printing to the console ([#80](https://github.com/mensfeld/mkdocs-material-linter/issues/80))
 
 ## 1.5.3 (2025-09-01)
 
