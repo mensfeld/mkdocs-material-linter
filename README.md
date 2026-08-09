@@ -31,6 +31,10 @@ This plugin ensures your Material for MkDocs documentation is valid, consistent,
 | `material-bundle-exec-shell-type` | Warning | Ensures code blocks starting with "bundle exec" use shell language type |
 | `material-blank-lines-spacing` | Warning | Ensures blank lines before and after headers and after code blocks |
 | `material-code-block-syntax` | Error | Code blocks must have proper syntax - no type on closing tag and all blocks must be closed |
+| `material-icons-valid` | Warning | Validates icon references use valid names from supported icon sets |
+| `material-meta-tags` | Warning | Encourages proper page metadata for SEO and social features |
+| `material-mermaid-syntax` | Error | Validates Mermaid code blocks contain valid diagram syntax |
+| `material-footnotes-syntax` | Error | Validates footnotes have matching references and definitions |
 
 ## Installation & Usage
 
@@ -54,23 +58,22 @@ pnpm add -D mkdocs-material-linter
 
 ### Configuration
 
-Add this plugin to your existing `.markdownlint-cli2.jsonc` configuration:
+Add this plugin to your existing `.markdownlint-cli2.jsonc` configuration. Once registered under `customRules`, **all rules are enabled by default** — you don't need to list them individually:
+
+```json
+{
+  "customRules": ["mkdocs-material-linter"]
+}
+```
+
+That's all you need to get started. If you want to disable specific rules or tweak their severity, add a `config` block (see [Advanced Configuration](#advanced-configuration) below):
 
 ```json
 {
   "customRules": ["mkdocs-material-linter"],
   "config": {
-    "material-admonition-types": true,
-    "material-admonition-indentation": true,
-    "material-admonition-empty": true,
-    "material-admonition-empty-title": true,
-    "material-code-annotations": true,
-    "material-content-tabs": true,
-    "material-navigation-structure": true,
-    "material-shell-language-standardization": true,
-    "material-bundle-exec-shell-type": true,
-    "material-blank-lines-spacing": true,
-    "material-code-block-syntax": true
+    "material-navigation-structure": false,
+    "material-code-annotations": "warning"
   }
 }
 ```
@@ -100,22 +103,11 @@ Install the [markdownlint extension](https://marketplace.visualstudio.com/items?
 
 ```json
 {
-  "markdownlint.customRules": ["mkdocs-material-linter"],
-  "markdownlint.config": {
-    "material-admonition-types": true,
-    "material-admonition-indentation": true,
-    "material-admonition-empty": true,
-    "material-admonition-empty-title": true,
-    "material-code-annotations": true,
-    "material-content-tabs": true,
-    "material-navigation-structure": true,
-    "material-shell-language-standardization": true,
-    "material-bundle-exec-shell-type": true,
-    "material-blank-lines-spacing": true,
-    "material-code-block-syntax": true
-  }
+  "markdownlint.customRules": ["mkdocs-material-linter"]
 }
 ```
+
+As with the CLI, all rules are enabled once registered. Add a `markdownlint.config` block only if you want to override individual rules.
 
 ## Advanced Configuration
 
