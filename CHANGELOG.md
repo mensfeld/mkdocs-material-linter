@@ -1,6 +1,6 @@
 # mkdocs-material-linter changelog
 
-## 1.5.4 (Unreleased)
+## 1.5.4 (2026-11-02)
 
 - [Fix] `material-code-block-syntax` and `material-blank-lines-spacing` no longer flag code fence examples nested inside a longer fence (e.g. a ` ``` ` block shown inside a ` ```` ` block). A fence now only closes with at least as many backticks as the one that opened it, matching CommonMark behavior ([#24](https://github.com/mensfeld/mkdocs-material-linter/issues/24))
 - [Fix] `material-meta-tags` now reads YAML front matter from `params.frontMatterLines` (markdownlint strips it out of `params.lines`), so pages that do have front matter are no longer always reported as missing it ([#80](https://github.com/mensfeld/mkdocs-material-linter/issues/80))
