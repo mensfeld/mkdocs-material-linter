@@ -39,6 +39,13 @@
         "eslint"
       ],
       "groupName": "ESLint updates"
+    },
+    {
+      "description": "Major updates stay manual",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
     }
   ],
   "dependencyDashboard": true,
@@ -56,5 +63,7 @@
     "schedule": [
       "before 4am on the first day of the month"
     ]
-  }
+  },
+  "automerge": true,
+  "platformAutomerge": true
 }
